@@ -4,9 +4,8 @@ Creates a local development environment powered by Docker and the [Woodby Docker
 
 ## Prerequisites
 
-Install and launch Docker Community Edition onto your workstation, if not already available. Note: Windows Home Edition is not supported.
-
-[Download Docker CE from this link](https://store.docker.com/search?type=edition&offering=community)
+* Install and launch Docker Community Edition onto your workstation, if not already available. Note: Windows Home Edition is not supported. [Download Docker CE from this link](https://store.docker.com/search?type=edition&offering=community)
+* Set your Docker preferences memory to 4GB of RAM or more, as the default of 2GB is insufficient for optimal performance.
 
 ## Setting It Up
 
