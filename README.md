@@ -10,12 +10,15 @@ Creates a local development environment powered by Docker and the [Woodby Docker
 ## Setting It Up
 
 * Download this project to a folder on your workstation.
+
 * Add the URLs to your `/etc/hosts` file:
 ```
 sudo nano /etc/hosts;
 127.0.0.1 localhost mailhog phpmyadmin portainer
 ```
+
 * Make an SSL certificate using one of these methods, store `localhost.key` and `localhost.crt` into the folder `certs/` within your project
+
 * Option 1 - Steps to make a self-signed certificate, for local sandboxes:
 ```
 openssl genrsa -des3 -passout pass:x -out localhost.pass.key 2048;
@@ -24,6 +27,7 @@ rm localhost.pass.key;
 openssl req -new -key localhost.key -out localhost.csr;
 openssl x509 -req -sha256 -days 365 -in localhost.csr -signkey localhost.key -out localhost.crt;
 ```
+
 * Option 2 - Steps to obtain an SSL certificate from LetsEncrypt.org, if using a real domain or subdomain:
 ```
 sudo add-apt-repository ppa:certbot/certbot;
@@ -31,10 +35,22 @@ sudo apt update;
 sudo apt install certbot;
 sudo certbot certonly --manual -d *.mydomain.com --agree-tos --no-bootstrap --manual-public-ip-logging-ok --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory;
 ```
+
 * If you're using a self-signed certificate, add it into your OS's Keychain App and set it to Always Trust to prevent browsers throwing security warnings.
+
 * Run `docker-compose up -d` to have docker download the images and bring your system online.
+
 * Point your browser to `https://localhost/` and set-up WordPress and WooCommerce to your liking.
+
 * Your web root is located in the `codebase/` folder inside the project folder.
+
+## Software Updating
+
+* To update docker images:
+```
+docker images |grep -v REPOSITORY|awk '{print $1}'|xargs -L1 docker pull;
+docker-compose up -d;
+```
 
 ### Further Notes
 
